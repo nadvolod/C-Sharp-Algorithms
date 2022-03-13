@@ -33,7 +33,6 @@ namespace Algorithms.Trees
         {
             if (BinaryTreeRoot == null)
                 return;
-
             Action(BinaryTreeRoot.Value);
             BinaryTreeRecursiveWalker.PreOrderVisitor<T>(BinaryTreeRoot.LeftChild, Action);
             BinaryTreeRecursiveWalker.PreOrderVisitor<T>(BinaryTreeRoot.RightChild, Action);
