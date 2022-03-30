@@ -1,9 +1,27 @@
 using System;
+using System.Linq;
 
 public class NextPermutation {
-
   // working code https://replit.com/@nadvolod/Algorithms
-    public void CalcNextPermutation(int[] nums) {
+  public static void Main (string[] args) {
+    int[] arr_1 = {1, 2, 3};
+    int[] expected_1 = {1,3,2};
+    var output_1 = CalcNextPermutation(arr_1);
+    //print out an array using String.Join()
+    Console.WriteLine(String.Join(",",output_1));
+    // Determines whether two sequences are equal according to an equality comparer
+    Console.WriteLine(output_1.SequenceEqual(expected_1));
+
+    int[] arr_2 = {9, 5, 4, 3, 1};
+    int[] expected_2 = {1,3,4,5,9};
+    var output_2 = CalcNextPermutation(arr_2);
+    //print out an array using String.Join()
+    Console.WriteLine(String.Join(",",output_2));
+    // Determines whether two sequences are equal according to an equality comparer
+    Console.WriteLine(output_2.SequenceEqual(expected_2));
+  }
+
+    public static int[] CalcNextPermutation(int[] nums) {
         // input: [9, 5, 4, 3, 1]
         //set i to 2nd to last element
         int i = nums.Length - 2;
@@ -25,9 +43,10 @@ public class NextPermutation {
             Swap(nums, i, j);
         }
         Reverse(nums, i+1);
+      return nums;
     }
     
-    private async void Reverse(int[] nums, int start) {
+    private static void Reverse(int[] nums, int start) {
         int i = start, j = nums.Length - 1;
       Console.WriteLine("Reverse() i:" + i + "j:" + j);
         while (i < j) {
@@ -37,7 +56,7 @@ public class NextPermutation {
         }
     }
 
-    private void Swap(int[] nums, int i, int j) {
+    private static void Swap(int[] nums, int i, int j) {
       Console.WriteLine("Swap() i:" + i + "j:" + j);
         int temp = nums[i];
         nums[i] = nums[j];

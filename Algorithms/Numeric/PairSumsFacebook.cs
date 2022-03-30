@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 
 public class TwoSumsFacebook {
+  // Working solution https://replit.com/@nadvolod/Algorithms#pairSums.cs
   public void Test(string[] args) {
     int k_1 = 6;
     int[] arr_1 = {1, 2, 3, 4, 3};
