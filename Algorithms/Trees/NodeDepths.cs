@@ -6,7 +6,7 @@ namespace Algorithms.Trees
 	// O(n) time where n is the number of nodes in the tree
 	// O(h) space where h is the height of the tree
 	// recursive approch is typically better than iterative
-	public static int NodeDepths(BinaryTree root) {
+	public static int NodeDepth(BinaryTree root) {
 		return calculateDepths(root, 0);	
 	}
 	public static int calculateDepths(BinaryTree root, int depth){

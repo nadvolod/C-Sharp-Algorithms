@@ -1,17 +1,17 @@
 using System;
 
-public class Program {
+public class InvertBinaryTree {
 	// O(n) time where n is the number of nodes
 	// O(d) space where d is the height of the tree. There comes a time when
 	// all of the leaf nodes are in the queue, with all of the nodes
-	public static void InvertBinaryTree(BinaryTree tree) {
+	public static void InvertTree(BinaryTree tree) {
 		// standard loc for a binary tree
 		if(tree == null){
 			return;
 		}
 		swapLeftAndRight(tree);
-		InvertBinaryTree(tree.left);
-		InvertBinaryTree(tree.right);
+		InvertTree(tree.left);
+		InvertTree(tree.right);
 	}
 	
 	private static void swapLeftAndRight(BinaryTree tree){
