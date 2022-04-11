@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-public class Program{
+public class AboveAverageSub{
 
 //   You are given an array A containing N integers. Your task is to find all subarrays whose average sum is greater than the average sum of the remaining array elements. You must return the start and end index of each subarray in sorted order.
 // A subarray that starts at position L1 and ends at position R1 comes before a subarray that starts at L2 and ends at R2 if L1 < L2, or if L1 = L2 and R1 ≤ R2.
@@ -17,24 +17,6 @@ public class Program{
 // A = [3, 4, 2]
 // output = [[1, 2], [1, 3], [2, 2]]
 // The above-average subarrays are [3, 4], [3, 4, 2], and [4].
-
-  public static void Main(string[] args) {
-    int[] arr_1 = {3, 4, 2};
-    aboveAverageSubarrays(arr_1);
-
-    /*
-      A = [3, 4, 2]
-      output = [[1, 2], [1, 3], [2, 2]]
-      The above-average subarrays are [3, 4], [3, 4, 2], and [4]
-      totalSum = 9
-i=0
-j=0
-sumCurrent=3
-denominator=3-(1)=2
-    */
-
-  }
-
   public class Subarray {
     int left;
     int right;
@@ -49,7 +31,7 @@ denominator=3-(1)=2
     }
   }
 
-  static Subarray[] aboveAverageSubarrays(int[] arr) {
+  public static Subarray[] aboveAverageSubarrays(int[] arr) {
     List<Subarray> resultList = new List<Subarray>();
 
     int totalSum = 0;
@@ -58,20 +40,18 @@ denominator=3-(1)=2
       totalSum += k;
     }
 
-    for (int i = 0; i < arr.Length; i++) {
+    for (int leftPointer = 0; leftPointer < arr.Length; leftPointer++) {
 
       int sumCurrent = 0;
-
-      for (int j = i; j < arr.Length; j++) {
-
-        sumCurrent += arr[j];
-        var denominator = (arr.Length - (j - i + 1)); 
+      for (int rightPointer = leftPointer; rightPointer < arr.Length; rightPointer++) {
+        //iterate through every single element and keep appending the new value to the sumCurrent
+        sumCurrent += arr[rightPointer];
+        //demoninator = arr.Length - (count of all integers involved in the sum, +1 because we need to count each index)
+        var denominator = arr.Length - (rightPointer - leftPointer + 1); 
         if(denominator == 0) continue;
-        //3/1 > (9-3)/2
-        if (sumCurrent / (j - i + 1) > (totalSum - sumCurrent) / denominator) {
+        if (sumCurrent / (rightPointer - leftPointer + 1) > (totalSum - sumCurrent) / denominator) {
           //1,1
-          var subArr = new Subarray(i + 1, j + 1);
-          Console.WriteLine(subArr.ToString());
+          var subArr = new Subarray(leftPointer + 1, rightPointer + 1);
           resultList.Add(subArr);
         }
       }
