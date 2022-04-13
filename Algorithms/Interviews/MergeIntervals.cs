@@ -37,28 +37,116 @@ public class MergeIntervals
      * 
      */
     
-    public static int[,] Merge(int[][] intervals)
+    public static int[][] Merge(int[][] intervals)
     {
+        //sort intervals based on increasing order of start
         intervals = intervals.OrderBy( x => x[0]).ToArray();
-        var merged = new List<int[]>();
+        var merged = new LinkedList<int[]>();
         // an interval is a single row in the array
         // we can access different elements like interval[0], interval[1]...
         foreach (var interval in intervals)
         {
             // if the first element of the interval is greater than 
-            if (merged.Count == 0 || merged[0].Last() < interval[0])
+            if (merged.Count == 0 || merged.Last()[1] < interval[0])
             {
                 //add a single int[] with 2 elements
-                merged.Add(interval);
+                merged.AddLast(interval);
             }
             // otherwise, there is overlap, so we merge the current and previous
             // intervals.
             else
             {
-                //merged.Last(Math.Max(merged.))
+                //merge the 2 intervals
             }
         }
 
-        return new int[1,0];
+        return new int[1][];
     }
+    /*
+     * Time complexity : O(n\log{}n)O(nlogn)
+     * Other than the sort invocation, we do a simple linear scan of the list,
+     * so the runtime is dominated by the O(n\log{}n)O(nlogn) complexity of sorting.
+        
+        Space complexity : O(\log N)O(logN) (or O(n)O(n))
+        If we can sort intervals in place, we do not need more than constant additional space, 
+        although the sorting itself takes O(\log n)O(logn) space. 
+        Otherwise, we must allocate linear space to store a copy of intervals and sort that.
+     */
+    
+    /*
+     * Solution from https://www.geeksforgeeks.org/merging-intervals/
+     *1. Sort the intervals based on increasing order of 
+    starting time.
+2. Push the first interval on to a stack.
+3. For each interval do the following
+   a. If the current interval does not overlap with the stack 
+       top, push it.
+   b. If the current interval overlaps with stack top and ending
+       time of current interval is more than that of stack top, 
+       update stack top with the ending  time of current interval.
+4. At the end stack contains the merged intervals.
+     *
+     * 
+     */
+    
+    // class sortHelper : IComparer
+    // {
+    //     int IComparer.Compare(object a, object b)
+    //     {
+    //         Interval first = (Interval)a;
+    //         Interval second = (Interval)b;
+    //         if (first.start == second.start)
+    //         {
+    //             return first.end - second.end;
+    //         }
+    //         return first.start - second.start;
+    //     }
+    // }
+    //
+    // // The main function that takes a set of intervals, merges
+    // // overlapping intervals and prints the result
+    // public static void mergeIntervals(Interval []arr)
+    // {
+    //
+    //     // Test if the given set has at least one interval
+    //     if (arr.Length <= 0)
+    //         return;
+    //     Array.Sort(arr, new sortHelper());
+    //
+    //     // Create an empty stack of intervals
+    //     Stack stack = new Stack();
+    //
+    //     // Push the first interval to stack
+    //     stack.Push(arr[0]);
+    //
+    //     // Start from the next interval and merge if necessary
+    //     for (int i = 1 ; i < arr.Length; i++)
+    //     {
+    //
+    //         // get interval from stack top
+    //         Interval top = (Interval)stack.Peek();
+    //
+    //         // if current interval is not overlapping with stack top,
+    //         // Push it to the stack
+    //         if (top.end < arr[i].start)
+    //             stack.Push(arr[i]);
+    //
+    //         // Otherwise update the ending time of top if ending of current
+    //         // interval is more
+    //         else if (top.end < arr[i].end)
+    //         {
+    //             top.end = arr[i].end;
+    //             stack.Pop();
+    //             stack.Push(top);
+    //         }
+    //     }
+    //
+    //     // Print contents of stack
+    //     Console.Write("The Merged Intervals are: ");
+    //     while (stack.Count != 0)
+    //     {
+    //         Interval t = (Interval)stack.Pop();
+    //         Console.Write("[" + t.start + "," + t.end + "] ");
+    //     }
+    // }
 }

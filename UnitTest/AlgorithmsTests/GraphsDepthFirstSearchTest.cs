@@ -3,11 +3,13 @@ using System.Diagnostics;
 
 using DataStructures.Graphs;
 using Algorithms.Graphs;
+using Xunit;
 
 namespace UnitTest.AlgorithmsTests
 {
 	public static class GraphsDepthFirstSearchTest
 	{
+		[Fact]
 		public static void DoTest ()
 		{
 			IGraph<string> graph = new UndirectedSparseGraph<string>();
